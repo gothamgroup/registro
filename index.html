@@ -1,0 +1,1574 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Clientes</title>
+        <style>  
+            /* Estilos generales */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #19183B;
+                margin: 0 auto;
+                padding: 20px;
+                width: 600px;
+                line-height: 1.6;
+                font-size: 12px; 
+            }
+            /* Estilo para la tabla contenedora */
+            .table-container {
+                width: 600px; /* Ancho fijo */
+                background-color: #ffffff; /* Fondo blanco */
+                margin: 20px auto; /* Centrado horizontal */
+                border-collapse: collapse; /* Elimina bordes adicionales */
+                border: 0; /* Sin bordes */
+            }
+            .container {
+                max-width: 600px; /* Ancho máximo del contenedor */
+                margin: 0 auto;
+                background: #fff; /* El contenedor principal sigue siendo blanco */
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            /* Banner corporativo */
+            .banner {
+                display: flex;
+                transform: scale(1.5);
+                justify-content: center; /* Centra horizontalmente */
+                align-items: center; /* Centra verticalmente */
+                min-height: 160px; /* Altura mínima para asegurar el centrado */
+                margin-bottom: 5px;
+            }
+            .banner img {
+                max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+                height: auto; /* Mantiene la proporción original */
+                transform: scale(1, 1); /* Reduce la altura en un 30% */
+                transform-origin: top; /* Ajusta el origen de la transformación al tope */
+                display: block; /* Elimina el espacio adicional debajo de la imagen */
+                margin: 0; /* Elimina cualquier margen implícito */
+                width: 50%; 
+            }
+            h1 {
+                text-align: center;
+                color: white;
+                margin-top: 0; /* Ajusta este valor según sea necesario */
+                margin-bottom: 20px;
+            }
+            .formsection {
+                background-color: #19183B; /* Color de fondo gris claro para la sección del formulario */
+                display: flex;
+                justify-content: center; /* Centra horizontalmente */
+                align-items: center; /* Centra verticalmente */
+                min-height: 100px; /* Altura mínima para asegurar el centrado */
+                margin-bottom: 5px;
+                
+            }
+            form {
+                display: flex;
+                max-width: 600px; 
+                /*justify-content: center;*/
+                flex-direction: column;
+                margin-top: 0; /* Elimina el margen superior */
+                padding-top: 0; /* Elimina el padding superior */
+                align-self: center;
+            }
+            label {
+                font-weight: bold;
+                margin-top: 0;
+                color: white;
+            }
+            input, select, textarea {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 12px;
+                box-sizing: border-box; /* Asegura que el padding y borde no afecten el ancho */
+            }
+            /* Cambiar color de fondo del campo "Empresa Solicitante" */
+            #empresa_solicitante {
+                background-color: #f0f0f0; /* Gris clarito */
+            }
+            button {
+                padding: 10px;
+                background-color: #ffffff;
+                color: rgb(0, 0, 0);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:hover {
+                background-color: #003d5c;
+            }
+
+            /* Pie de página */
+            .footer {
+                margin-top: 20px;
+                padding: 15px 0;
+                background-color: #e2e9f3;
+                font-size: 12px;
+                color: #999999;
+                line-height: 1.4;
+                text-align: center;
+                max-height: 65px; /* Altura máxima para evitar desbordamiento */
+                margin-bottom: 20px;
+            }
+            .footer a {
+                color: #0073e6;
+                text-decoration: none;
+            }
+            .footer a:hover {
+                text-decoration: underline;
+            }
+
+            /* Estilos para la vista previa de impresión */
+            .print-container {
+                margin-top: 20px;
+            }
+            .print-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .print-header img {
+                max-height: 200px;
+                max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+                margin-bottom: 10px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .print-header h1 {
+                font-size: 28px; /* Encabezado en 24px */
+                color: #005883;
+                margin: 0;
+            }
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: auto; /* Ajuste automático del ancho de las columnas */
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #ddd;
+                padding: 10px; /* Espaciado moderado */
+                text-align: left;
+                font-size: 12px; /* Celdas en 12px */
+                line-height: 1.4; /* Interlineado adecuado */
+                white-space: normal; /* Permite que el texto se ajuste dentro de la celda */
+                word-wrap: break-word; /* Rompe palabras largas si es necesario */
+                vertical-align: top; /* Alinea el texto hacia arriba */
+            }
+            .print-table th {
+                background-color: #005883;
+                color: white;
+                font-size: 14px; /* Encabezados de tabla en 14px */
+            }
+            /* Pie de página en la versión impresa */
+            .print-footer {
+                margin-top: 20px;
+                padding: 15px 0;
+                background-color: #f4f4f4;
+                font-size: 12px;
+                color: #999999;
+                line-height: 1.4;
+                text-align: center;
+            }
+            .print-footer a {
+                color: #0073e6;
+                text-decoration: none;
+            }
+            .print-footer a:hover {
+                text-decoration: underline;
+            }
+            /* Botón de impresión en la nueva ventana */
+            .print-button {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .print-button button {
+                padding: 10px 20px;
+                background-color: #005883;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .print-button button:hover {
+                background-color: #003d5c;
+            }
+            /* Estilos para el contenedor principal de elementos en línea */
+            .contenedor-inline {
+                display: flex;
+                gap: 5px; /* Espacio entre los elementos internos */
+                margin-top: 5px; /* Margen superior */
+            }
+
+            /* Estilos para los elementos flexibles dentro del contenedor */
+            .elemento-flexible {
+                flex: 1; /* Permite que los elementos crezcan y se encojan proporcionalmente */
+            }
+
+            /* Estilo para el elemento flexible con ancho máximo */
+            .elemento-ancho-maximo {
+                max-width: 280px; /* Ancho máximo específico */
+            }
+
+            /* Estilo para el elemento flexible que ocupa el 50% del ancho */
+            .elemento-mitad-ancho {
+                flex: 1;
+                max-width: 50%; /* Ancho máximo del 50% */
+            }
+
+            /* Estilo para inputs, selects y textareas que ocupan todo el ancho de su contenedor */
+            .campo-ancho-completo {
+                width: 100%;
+            }
+            /* Estilos para el PDF */
+
+            /* Estilos para la vista previa de impresión */
+            @media print {
+                .print-button {
+                    display: none; /* Ocultar el botón en la versión impresa */
+                }
+                /* Evitar que el contenido se desborde */
+                body {
+                    margin: 0;
+                    padding: 0;
+                    overflow: visible;
+                }
+                .print-table {
+                    page-break-inside: avoid; /* Evita que la tabla se divida entre páginas */
+                }
+                .print-footer {
+                    page-break-inside: avoid; /* Evita que el pie de página se divida */
+                }
+                .pdf-container {
+                    page-break-before: always; /* Forzar nueva página para el PDF */
+                }
+            }
+        </style>  
+    </head>
+    <body>
+        <div class="container">
+                    
+            <!-- Banner corporativo -->
+            <!-- RegistroClientesV12Qw version 11 -->
+            <div class="banner">
+                <img src="logo.png" alt="Banner Corporativo">
+            </div>
+        </div>
+
+            <!-- Título del formulario -->
+            <h1 style="padding-top: 20px;">Registro de Clientes</h1>      
+            
+            <div class="formsection">
+                <!-- Formulario de registro -->
+                <form id="registro-form" name="Registro de Clientes" action="#" method="post">
+                    <!-- Información básica -->
+                    <label for="empresa_solicitante">Empresa Solicitante/Cliente:</label>
+                    <input type="text" id="empresa_solicitante" name="empresa_solicitante" placeholder="Ingrese el nombre de la empresa" required>
+
+                    <!-- Contenedor para No. R.I.F., Tipo de Contribuyente, Fecha de Constitución y Zona/Estado -->
+                    <div class="contenedor-inline">
+                        <div class="elemento-flexible elemento-ancho-maximo">
+                                <label for="No. R.I.F.">No. R.I.F.:</label>
+                                <input type="text" id="No. R.I.F." name="No. R.I.F." placeholder="J0123456789" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible elemento-ancho-maximo">
+                                <label for="tipo_contribuyente">Tipo de Contribuyente:</label>
+                                <select id="tipo_contribuyente" name="tipo_contribuyente" required class="campo-ancho-completo">
+                                    <option value="" disabled selected>Seleccione</option>
+                                    <option>Ordinario</option>
+                                    <option>Especial</option>
+                                    <option>No Contribuyente</option>
+                                </select>
+                            </div>
+                            <div class="elemento-flexible elemento-ancho-maximo">
+                                <label for="fecha_constitucion">Fecha de Constitución:</label>
+                                <input type="date" id="fecha_constitucion" name="fecha_constitucion" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible elemento-ancho-maximo">
+                                <label for="zona">Zona/Estado:</label>
+                                <select id="zona" name="zona" requiredclass="campo-ancho-completo">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option>Amazonas</option>
+                                    <option>Anzoátegui</option>
+                                    <option>Apure</option>
+                                    <option>Aragua</option>
+                                    <option>Barinas</option>
+                                    <option>Bolívar</option>
+                                    <option>Carabobo</option>
+                                    <option>Cojedes</option>
+                                    <option>Delta Amacuro</option>
+                                    <option>Distrito Capital</option>
+                                    <option>Falcón</option>
+                                    <option>Guárico</option>
+                                    <option>Lara</option>
+                                    <option>Mérida</option>
+                                    <option>Miranda</option>
+                                    <option>Monagas</option>
+                                    <option>Nueva Esparta</option>
+                                    <option>Portuguesa</option>
+                                    <option>Sucre</option>
+                                    <option>Táchira</option>
+                                    <option>Trujillo</option>
+                                    <option>Vargas</option>
+                                    <option>Yaracuy</option>
+                                    <option>Zulia</option>
+                                    <option>Dependencias Federales</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Contenedor para Dirección Fiscal y Dirección de Atención -->
+                        <div class="contenedor-inline">
+                            <div class="elemento-flexible elemento-mitad-ancho">
+                                <label for="direccion_fiscal">Dirección Fiscal:</label>
+                                <textarea id="direccion_fiscal" name="direccion_fiscal" rows="3" placeholder="Ingrese la dirección fiscal" required class="campo-ancho-completo"></textarea>
+                            </div>
+                            <div class="elemento-flexible elemento-mitad-ancho">
+                                <label for="direccion_atencion">Dirección de Atención:</label>
+                                <textarea id="direccion_atencion" name="direccion_atencion" rows="3" placeholder="Ingrese la dirección de atención" required class="campo-ancho-completo"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Contenedor para Representante Legal y Correo Electrónico -->
+                        <div class="contenedor-inline">
+                            <div class="elemento-flexible">
+                                <label for="representante_legal">Representante Legal:</label>
+                                <input type="text" id="representante_legal" name="representante_legal" placeholder="Nombre completo del representante legal" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible">
+                                <label for="cedula_representante">Cédula del Representante:</label>
+                                <input type="text" id="cedula_representante" name="cedula_representante" placeholder="Ejemplo: V123456789" required class="campo-ancho-completo">
+                            </div>
+                        </div>
+                        <!-- Contenedor para Cargo del Representante Legal y Correo Electrónico -->
+                        <div class="contenedor-inline">
+                            <div class="elemento-flexible">
+                                <label for="cargo_representante_legal">Cargo del Representante Legal:</label>
+                                <input type="text" id="cargo_representante_legal" name="cargo_representante_legal" placeholder="Cargo del representante legal" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible">
+                                <label for="correo_electronico">Correo electrónico:</label>
+                                <input type="email" id="correo_electronico" name="correo_electronico" placeholder="Ejemplo: ejemplo@dominio.com" required class="campo-ancho-completo">
+                            </div>
+                        </div>
+
+                        <!-- Contenedor para Teléfono Cliente y Móvil Cliente -->
+                        <div class="contenedor-inline">
+                            <div class="elemento-flexible">
+                                <label for="telefono_cliente">Teléfono Cliente:</label>
+                                <input type="text" id="telefono_cliente" name="telefono_cliente" placeholder="Ejemplo: (0212) 123-4567" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible">
+                                <label for="movil_cliente">Móvil Cliente:</label>
+                                <input type="text" id="movil_cliente" name="movil_cliente" placeholder="Ejemplo: 0412-1234567" required class="campo-ancho-completo">
+                            </div>
+                        </div>
+
+                        <!-- Contenedor para Persona Contacto y Teléfono Contacto -->
+                        <div class="contenedor-inline">
+                            <div class="elemento-flexible">
+                                <label for="persona_contacto">Persona Contacto:</label>
+                                <input type="text" id="persona_contacto" name="persona_contacto" placeholder="Nombre completo de la persona contacto" required class="campo-ancho-completo">
+                            </div>
+                            <div class="elemento-flexible">
+                                <label for="telefono_contacto">Teléfono Contacto:</label>
+                                <input type="text" id="telefono_contacto" name="telefono_contacto" placeholder="Ejemplo: (0212) 123-4567" required class="campo-ancho-completo">
+                            </div>
+                        </div>
+                        <!-- Información Actividad Económica -->
+                        <label for="Actividad_Economica">Actividad Económica:</label>
+                        <input type="text" id="Actividad_Economica" name="Actividad_Economica" placeholder="Describa la Actividad Económica de la Empresa" required>
+                        <!-- Información Método de Facturación -->
+
+                        <label for="Metodo Facturacion">Método de Facturación:</label>
+                        
+                            <select id="metodo_facturacion" name="zona" required class="campo-ancho-completo">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option>Forma Libre</option>
+                                <option>Impresora Fiscal</option>
+                                <option>Imprenta Digital</option>
+                                <option>Imprenta Fiscal e Imprenta Digital</option>
+                            </select>
+
+
+                        <!-- Botón para cargar el PDF -->
+                        <label for="pdf-file" class="no-print">Anexar PDF (Requerido):</label>
+                        <input type="file" id="pdf-file" accept="application/pdf" class="no-print" required>
+
+                        <!-- Botones de acción -->
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px; gap: 10px;">
+                            <button type="button" id="limpiar-btn" class="clear-button">Limpiar Campos</button>
+                            <button type="button" id="encuesta-btn" class="no-print">Llenar encuesta</button>
+                            <button type="button" id="imprimir-btn" class="no-print">Generar Planilla</button>
+                        </div>
+
+                                <!-- Sección de Encuesta (oculta por defecto) -->
+                                <div id="seccion-encuesta" style="display: none; margin-top: 20px; padding: 20px; background-color: #6d97e47c; border-radius: 8px; border: 1px solid #a0b8e6; color: white;">
+                                    <h3 style="color: white; margin-top: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Encuesta de Diagnóstico Empresarial</h3>
+                                    <p style="font-size: 14px; color: #e0e0e0; margin-bottom: 20px;">Esta información nos ayudará a entender mejor sus necesidades y ofrecerle una solución personalizada.</p>
+
+                                    <!-- 1. Equipos de Computación -->
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="equipos_computacion" style="display: block; margin-bottom: 10px;">1. ¿Qué equipos de computación posee? (Seleccione todos los que apliquen)</label>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <!-- Opción: Desktops -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_desktops" name="tipo_equipo" value="Desktops" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_desktops" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Desktops</label>
+                                                <input type="number" id="cant_desktops" name="cant_desktops" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_desktops" name="det_desktops" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Laptops -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_laptops" name="tipo_equipo" value="Laptops" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_laptops" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Laptops</label>
+                                                <input type="number" id="cant_laptops" name="cant_laptops" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_laptops" name="det_laptops" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Servidores -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_servidores" name="tipo_equipo" value="Servidores" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_servidores" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Servidores</label>
+                                                <input type="number" id="cant_servidores" name="cant_servidores" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_servidores" name="det_servidores" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Otros -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_otros" name="tipo_equipo" value="Otros" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_otros" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Otros</label>
+                                                <input type="number" id="cant_otros" name="cant_otros" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_otros" name="det_otros" placeholder="Especifique tipo y detalles" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 2. Equipos de Redes -->
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="equipos_redes" style="display: block; margin-bottom: 10px;">2. ¿Qué equipos de redes posee? (Seleccione todos los que apliquen)</label>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <!-- Opción: Routers -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_routers" name="tipo_equipo_red" value="Routers" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_routers" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Routers</label>
+                                                <input type="number" id="cant_routers" name="cant_routers" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_routers" name="det_routers" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Switches -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_switches" name="tipo_equipo_red" value="Switches" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_switches" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Switches</label>
+                                                <input type="number" id="cant_switches" name="cant_switches" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_switches" name="det_switches" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Firewalls -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_firewalls" name="tipo_equipo_red" value="Firewalls" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_firewalls" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Firewalls</label>
+                                                <input type="number" id="cant_firewalls" name="cant_firewalls" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_firewalls" name="det_firewalls" placeholder="Detalles (marca, modelo, etc.)" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+
+                                            <!-- Opción: Otros -->
+                                            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                <input type="checkbox" id="chk_otros_redes" name="tipo_equipo_red" value="Otros" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                <label for="chk_otros_redes" style="flex-shrink: 0; min-width: 80px; white-space: nowrap;">Otros</label>
+                                                <input type="number" id="cant_otros_redes" name="cant_otros_redes" min="0" placeholder="Cantidad" style="width: 90px; background-color: white; color: black; padding: 5px; flex-shrink: 0;" disabled>
+                                                <input type="text" id="det_otros_redes" name="det_otros_redes" placeholder="Especifique tipo y detalles" style="flex: 1; min-width: 0; background-color: white; color: black; padding: 5px; margin-left: 5px;" disabled>
+                                            </div>
+                                        </div>
+                                        <!-- Campo adicional: Descripción general de la infraestructura -->
+                                        <div style="margin-top: 15px;">
+                                            <label for="detalle_redes" style="display: block; margin-bottom: 5px;">Describa brevemente su infraestructura de red (topología, marcas, observaciones, etc.):</label>
+                                            <textarea id="detalle_redes" name="detalle_redes" rows="3" placeholder="Ej: Red en estrella con switch Cisco SG350, router MikroTik, firewall Fortinet. Conectividad a internet por fibra óptica de 100Mbps." style="width: 100%; background-color: white; color: black; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- 3. Productos o Servicios -->
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="productos_servicios" style="display: block; margin-bottom: 15px; color: white;">3. ¿Qué productos o servicios principales maneja su empresa?</label>
+                                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                                        
+
+                                            <!-- Sección: Productos -->
+                                            <div style="margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.3);">
+                                            <h4 style="color: white; margin: 0 0 10px 0;">Productos</h4>
+                                            
+                                            <!-- Categoría: Alimentos y Bebidas -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_alimentos" name="categoria_producto" value="Alimentos y Bebidas" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_alimentos" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Alimentos y Bebidas</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_alimentos" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_alimentos" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Alimentos procesados" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Alimentos procesados</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Bebidas alcohólicas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Bebidas alcohólicas</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Bebidas no alcohólicas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Bebidas no alcohólicas</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Frutas y verduras" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Frutas y verduras</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Carnes y embutidos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Carnes y embutidos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_alimentos" value="Productos de panadería y repostería" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Productos de panadería y repostería</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Categoría: Ropa y Accesorios -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_ropa" name="categoria_producto" value="Ropa y Accesorios" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_ropa" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Ropa y Accesorios</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_ropa" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_ropa" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_ropa" value="Prendas de vestir para damas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Prendas de vestir para damas</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_ropa" value="Prendas de vestir para caballeros" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Prendas de vestir para caballeros</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_ropa" value="Ropa infantil" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Ropa infantil</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_ropa" value="Calzado" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Calzado</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_ropa" value="Accesorios de moda (bolsos, cinturones, joyería)" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Accesorios de moda (bolsos, cinturones, joyería)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Categoría: Tecnología y Electrónica -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_tecnologia" name="categoria_producto" value="Tecnología y Electrónica" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_tecnologia" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Tecnología y Electrónica</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_tecnologia" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_tecnologia" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_tecnologia" value="Teléfonos móviles y accesorios" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Teléfonos móviles y accesorios</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_tecnologia" value="Computadoras y periféricos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Computadoras y periféricos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_tecnologia" value="Electrodomésticos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Electrodomésticos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_tecnologia" value="Equipos de audio y video" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Equipos de audio y video</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_tecnologia" value="Componentes electrónicos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Componentes electrónicos</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <!-- Categoría: Hogar y Decoración -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_hogar" name="categoria_producto" value="Hogar y Decoración" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_hogar" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Hogar y Decoración</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_hogar" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_hogar" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_hogar" value="Muebles" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Muebles</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_hogar" value="Artículos de cocina" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Artículos de cocina</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_hogar" value="Decoración interior" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Decoración interior</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_hogar" value="Textiles para el hogar" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Textiles para el hogar</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_hogar" value="Herramientas y ferretería" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Herramientas y ferretería</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Categoría: Salud y Belleza -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_salud" name="categoria_producto" value="Salud y Belleza" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_salud" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Salud y Belleza</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_salud" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_salud" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_salud" value="Cosméticos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Cosméticos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_salud" value="Productos de cuidado personal" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Productos de cuidado personal</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_salud" value="Medicamentos y suplementos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Medicamentos y suplementos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_salud" value="Equipos médicos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Equipos médicos</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Categoría: Vehículos y Transporte -->
+                                            <div>
+                                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                    <input type="checkbox" id="chk_vehiculos" name="categoria_producto" value="Vehículos y Transporte" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                    <label for="chk_vehiculos" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Vehículos y Transporte</label>
+                                                    <button type="button" class="btn-toggle-all" data-target="grupo_vehiculos" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                </div>
+                                                <div id="grupo_vehiculos" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_vehiculos" value="Repuestos y accesorios automotrices" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Repuestos y accesorios automotrices</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_vehiculos" value="Bicicletas y motos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Bicicletas y motos</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                                            <input type="checkbox" name="subcategoria_vehiculos" value="Lubricantes y productos de mantenimiento" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                            <span style="color: white; font-size: 12px;">Lubricantes y productos de mantenimiento</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Sección: Servicios -->
+                                            <div style="margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.3);">
+                                                <h4 style="color: white; margin: 0 0 10px 0;">Servicios</h4>
+
+                                                <!-- Subcategoría: Servicios Profesionales -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_servicios_prof" name="categoria_producto" value="Servicios Profesionales" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_servicios_prof" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Servicios Profesionales</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_servicios_prof" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_servicios_prof" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_prof" value="Consultoría administrativa" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Consultoría administrativa</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_prof" value="Asesoría legal" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Asesoría legal</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_prof" value="Servicios contables" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Servicios contables</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_prof" value="Diseño gráfico y multimedia" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Diseño gráfico y multimedia</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_prof" value="Desarrollo de software" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Desarrollo de software</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategoría: Servicios Personales -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_servicios_pers" name="categoria_producto" value="Servicios Personales" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_servicios_pers" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Servicios Personales</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_servicios_pers" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_servicios_pers" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_pers" value="Peluquería y estética" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Peluquería y estética</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_pers" value="Entrenamiento físico" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Entrenamiento físico</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_pers" value="Cuidado infantil" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Cuidado infantil</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_servicios_pers" value="Servicios de limpieza" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Servicios de limpieza</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategoría: Educación y Capacitación -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_educacion" name="categoria_producto" value="Educación y Capacitación" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_educacion" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Educación y Capacitación</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_educacion" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_educacion" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_educacion" value="Cursos técnicos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Cursos técnicos</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_educacion" value="Talleres y seminarios" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Talleres y seminarios</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_educacion" value="Tutorías personalizadas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Tutorías personalizadas</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_educacion" value="Formación en línea" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Formación en línea</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategoría: Transporte y Logística -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_transporte_log" name="categoria_producto" value="Transporte y Logística" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_transporte_log" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Transporte y Logística</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_transporte_log" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_transporte_log" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_transporte_log" value="Envíos y mensajería" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Envíos y mensajería</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_transporte_log" value="Transporte privado" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Transporte privado</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_transporte_log" value="Mudanzas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Mudanzas</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_transporte_log" value="Almacenamiento" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Almacenamiento</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategoría: Reparación y Mantenimiento -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_reparacion" name="categoria_producto" value="Reparación y Mantenimiento" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_reparacion" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Reparación y Mantenimiento</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_reparacion" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_reparacion" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_reparacion" value="Servicios técnicos (electrónica, computación)" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Servicios técnicos (electrónica, computación)</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_reparacion" value="Mantenimiento de vehículos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Mantenimiento de vehículos</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_reparacion" value="Reparación de electrodomésticos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Reparación de electrodomésticos</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategoría: Entretenimiento y Eventos -->
+                                                <div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                                        <input type="checkbox" id="chk_entretenimiento" name="categoria_producto" value="Entretenimiento y Eventos" style="flex-shrink: 0; width: 16px; height: 16px;">
+                                                        <label for="chk_entretenimiento" style="flex-shrink: 0; min-width: 200px; white-space: nowrap; color: white;">Entretenimiento y Eventos</label>
+                                                        <button type="button" class="btn-toggle-all" data-target="grupo_entretenimiento" style="padding: 2px 8px; font-size: 10px; background-color: #005883; color: white; border: none; border-radius: 4px; cursor: pointer; display: none;" disabled>Seleccionar Todo</button>
+                                                    </div>
+                                                    <div id="grupo_entretenimiento" style="margin-top: 10px; padding-left: 30px; display: none; background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; padding: 0 10px;">
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_entretenimiento" value="Organización de eventos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Organización de eventos</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_entretenimiento" value="Servicios de catering" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Servicios de catering</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_entretenimiento" value="Producción audiovisual" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Producción audiovisual</span>
+                                                            </div>
+                                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                                <input type="checkbox" name="subcategoria_entretenimiento" value="Actividades recreativas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                                <span style="color: white; font-size: 12px;">Actividades recreativas</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Campo de texto adicional para "Otros" o descripción libre -->
+                                            <div style="margin-top: 20px;">
+                                                <label for="otros_productos" style="display: block; margin-bottom: 5px; color: white;">Otro (especifique):</label>
+                                                <input type="text" id="otros_productos" name="otros_productos" placeholder="Si no está en la lista, descríbalo aquí" style="width: 100%; background-color: white; color: black; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            </div>
+                                        </div>
+                                        <!-- 4. Áreas a Controlar -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label for="areas_controlar" style="display: block; margin-bottom: 15px; color: white;">4. ¿Qué áreas del negocio desea controlar o mejorar con un sistema de gestión? (Seleccione todas las que apliquen)</label>
+                                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px;">
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_ventas" name="area_control" value="Ventas" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Ventas</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_compras" name="area_control" value="Compras" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Compras</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_inventario" name="area_control" value="Inventario" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Inventario</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_contabilidad" name="area_control" value="Contabilidad" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Contabilidad</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_rrhh" name="area_control" value="Recursos Humanos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Recursos Humanos</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_punto_venta" name="area_control" value="Punto de Venta" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Punto de Venta</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_facturacion" name="area_control" value="Facturación" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Facturación</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_produccion" name="area_control" value="Producción" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Producción</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_logistica" name="area_control" value="Logística" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Logística</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_marketing" name="area_control" value="Marketing" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Marketing</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_crm" name="area_control" value="Relación con Clientes (CRM)" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Relación con Clientes (CRM)</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_proyectos" name="area_control" value="Gestión de Proyectos" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Gestión de Proyectos</span>
+                                                </div>
+                                            </div>
+                                            <!-- Campo de texto para "Otra área" -->
+                                            <div style="margin-top: 15px;">
+                                                <label for="otra_area" style="display: block; margin-bottom: 5px; color: white;">Otra área (especifique):</label>
+                                                <input type="text" id="otra_area" name="otra_area" placeholder="Nombre de la área no listada" style="width: 100%; background-color: white; color: black; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            </div>
+                                        </div>
+
+                                        <!-- 5. Nivel de Ventas Mensuales -->
+                                        <!-- (Solo USD) -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label for="nivel_ventas" style="display: block; margin-bottom: 10px; color: white;">5. Indique el nivel de ventas mensuales (USD):</label>
+                                            <select id="nivel_ventas" name="nivel_ventas" style="width: 100%; background-color: white; color: black; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; box-sizing: border-box;" >
+                                                <option value="" disabled selected>Seleccione un rango</option>
+                                                <option>Menos de 5.000</option>
+                                                <option>5.000 - 10.000</option>
+                                                <option>10.000 - 15.000</option>
+                                                <option>15.000 - 20.000</option>
+                                                <option>20.000 - 30.000</option>
+                                                <option>Más de 30.000</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- 6. Redes Sociales -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label for="redes_sociales" style="display: block; margin-bottom: 15px; color: white;">6. ¿En qué redes sociales tiene presencia su empresa? (Seleccione todas las que apliquen)</label>
+                                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px; margin-bottom: 15px;">
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_facebook" name="red_social" value="Facebook" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Facebook</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_instagram" name="red_social" value="Instagram" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Instagram</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_twitter" name="red_social" value="Twitter/X" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Twitter/X</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_linkedin" name="red_social" value="LinkedIn" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">LinkedIn</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_tiktok" name="red_social" value="TikTok" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">TikTok</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_youtube" name="red_social" value="YouTube" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">YouTube</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_whatsapp" name="red_social" value="WhatsApp Business" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">WhatsApp Business</span>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" id="chk_pinterest" name="red_social" value="Pinterest" style="width: 16px; height: 16px; flex-shrink: 0;">
+                                                    <span style="color: white; font-size: 12px;">Pinterest</span>
+                                                </div>
+                                            </div>
+                                            <!-- Campo de texto para "Otra red social" -->
+                                            <div style="margin-top: 15px;">
+                                                <label for="otra_red_social" style="display: block; margin-bottom: 5px; color: white;">Otra red social (especifique):</label>
+                                                <input type="text" id="otra_red_social" name="otra_red_social" placeholder="Ej: Snapchat, Discord, Telegram, etc." style="width: 100%; background-color: white; color: black; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                                            </div>
+                                        </div>
+
+                                        <!-- 7. Número de Empleados -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label for="num_empleados" style="display: block; margin-bottom: 10px; color: white;">7. Número aproximado de empleados:</label>
+                                            <select id="num_empleados" name="num_empleados" style="width: 100%; background-color: white; color: black; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; box-sizing: border-box;" >
+                                                <option value="" disabled selected>Seleccione un rango</option>
+                                                <option>Menos de 5</option>
+                                                <option>6 - 10</option>
+                                                <option>11 - 20</option>
+                                                <option>21 - 30</option>
+                                                <option>Más de 30</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- 8. Nivel Educativo del Personal de Gestión Administrativa -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label for="nivel_educativo" style="display: block; margin-bottom: 10px; color: white;">8. Nivel académico del personal de gestión administrativa:</label>
+                                            <select id="nivel_educativo" name="nivel_educativo" style="width: 100%; background-color: white; color: black; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; box-sizing: border-box;" >
+                                                <option value="" disabled selected>Seleccione una opción</option>
+                                                <option>Básico</option>
+                                                <option>Técnico</option>
+                                                <option>Universitario</option>
+                                            </select>
+                                        </div>
+
+                                    
+                                    </div>
+                            
+                </form>
+            <div>
+                <div class="footer no-print">
+                    &copy; 2025 Gotham Group Asesores, C.A. Todos los derechos reservados.<br>
+                    RegistroClientesV14Qw<br>
+                    Para más información, contáctenos en:
+                    <a href="mailto:gothamgroup@gmail.com">gothamgroup@gmail.com</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Función para limpiar los campos del formulario
+                document.getElementById("limpiar-btn").addEventListener("click", function () {
+                    if (confirm("¿Está seguro de que desea limpiar todos los campos?")) {
+                        document.getElementById("registro-form").reset();
+                        // También restablecemos la sección de encuesta si está visible
+                        const seccionEncuesta = document.getElementById("seccion-encuesta");
+                        if (seccionEncuesta) {
+                            seccionEncuesta.style.display = "none";
+                            document.getElementById("encuesta-btn").textContent = "Llenar encuesta";
+                        }
+                    }
+                });
+
+                // Forzar que el select de "Nivel de Ventas" muestre "Seleccione un rango" por defecto
+                document.getElementById('nivel_ventas').value = "";
+
+                // Función para mostrar/ocultar la sección de encuesta
+                const encuestaBtn = document.getElementById("encuesta-btn");
+                if (encuestaBtn) {
+                    encuestaBtn.addEventListener("click", function () {
+                        const seccionEncuesta = document.getElementById("seccion-encuesta");
+                        if (seccionEncuesta.style.display === "none" || seccionEncuesta.style.display === "") {
+                            seccionEncuesta.style.display = "block";
+                            this.textContent = "Ocultar encuesta";
+                        } else {
+                            seccionEncuesta.style.display = "none";
+                            this.textContent = "Llenar encuesta";
+                        }
+                    });
+                }
+
+                // Función para habilitar/deshabilitar campos de Equipos de Computación
+                const checkboxesComputacion = document.querySelectorAll('input[name="tipo_equipo"]');
+                checkboxesComputacion.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        const tipo = this.value.toLowerCase(); // 'desktops', 'laptops', 'servidores', 'otros'
+                        const inputCantidad = document.getElementById(`cant_${tipo}`);
+                        const inputDetalles = document.getElementById(`det_${tipo}`);
+                        
+                        if (this.checked) {
+                            inputCantidad.disabled = false;
+                            inputDetalles.disabled = false;
+                            inputCantidad.focus(); // Enfoca el campo de cantidad para mejorar la experiencia de usuario
+                        } else {
+                            inputCantidad.disabled = true;
+                            inputDetalles.disabled = true;
+                            inputCantidad.value = ''; // Limpiar valor al desmarcar
+                            inputDetalles.value = ''; // Limpiar valor al desmarcar
+                        }
+                    });
+                });
+
+                // Habilitar/deshabilitar campos de cantidad y detalles para equipos de redes
+                const checkboxesRedes = document.querySelectorAll('input[name="tipo_equipo_red"]');
+                checkboxesRedes.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        const tipo = this.value.toLowerCase(); // 'routers', 'switches', 'firewalls', 'otros'
+                        const inputCantidad = document.getElementById(`cant_${tipo}`);
+                        const inputDetalles = document.getElementById(`det_${tipo}`);
+                        
+                        if (this.checked) {
+                            inputCantidad.disabled = false;
+                            inputDetalles.disabled = false;
+                            inputCantidad.focus();
+                        } else {
+                            inputCantidad.disabled = true;
+                            inputDetalles.disabled = true;
+                            inputCantidad.value = '';
+                            inputDetalles.value = '';
+                        }
+                    });
+                });
+
+                // Mostrar/ocultar grupos de subcategorías y controlar botones "Seleccionar Todo"
+                const checkboxesCategorias = document.querySelectorAll('input[name="categoria_producto"]');
+                checkboxesCategorias.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        const sufijo = this.id.replace('chk_', '');
+                        const grupo = document.getElementById(`grupo_${sufijo}`);
+                        const botonToggle = document.querySelector(`.btn-toggle-all[data-target="grupo_${sufijo}"]`);
+                        
+                        if (this.checked) {
+                            grupo.style.display = 'block';
+                            botonToggle.style.display = 'inline-block';
+                            botonToggle.disabled = false;
+                        } else {
+                            grupo.style.display = 'none';
+                            botonToggle.style.display = 'none';
+                            botonToggle.disabled = true;
+                            // Desmarcar todos los checkboxes del grupo
+                            grupo.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                        }
+                    });
+                });
+
+                // Lógica para el botón "Seleccionar Todo / Ninguno"
+                document.querySelectorAll('.btn-toggle-all').forEach(function(boton) {
+                    boton.addEventListener('click', function() {
+                        const grupoId = this.getAttribute('data-target');
+                        const grupo = document.getElementById(grupoId);
+                        const checkboxes = grupo.querySelectorAll('input[type="checkbox"]');
+                        const todosMarcados = Array.from(checkboxes).every(cb => cb.checked);
+                        
+                        checkboxes.forEach(cb => {
+                            cb.checked = !todosMarcados; // Si todos están marcados, desmarca todos. Si no, márcalos todos.
+                        });
+                        
+                        this.textContent = todosMarcados ? 'Deseleccionar Todo' : 'Seleccionar Todo';
+                    });
+                });
+
+                
+
+                // Función para validar el formulario y generar la planilla
+                document.getElementById("imprimir-btn").addEventListener("click", function () {
+                    const form = document.getElementById("registro-form");
+                    const pdfFile = document.getElementById("pdf-file").files[0];
+
+                    // Verificar si hay campos vacíos
+                    let hasEmptyFields = false;
+                    Array.from(form.elements).forEach((element) => {
+                        // Excluir el botón de "Limpiar Campos" y campos de la encuesta que no son obligatorios
+                        if (element.required && !element.value && element.id !== "limpiar-btn" && !element.classList.contains('no-required-encuesta')) {
+                            hasEmptyFields = true;
+                        }
+                    });
+
+                    if (hasEmptyFields) {
+                        alert("Por favor, complete todos los campos obligatorios.");
+                        return;
+                    }
+
+                    // Verificar si se ha cargado un archivo PDF
+                    if (!pdfFile) {
+                        alert("Debe anexar un archivo PDF antes de generar la planilla.");
+                        return;
+                    }
+
+                    // Obtener valores del formulario
+                    const empresa = document.getElementById("empresa_solicitante").value;
+                    const rif = document.getElementById("No. R.I.F.").value;
+                    const tipoContribuyente = document.getElementById("tipo_contribuyente").value;
+                    const fechaInput = document.getElementById("fecha_constitucion").value;
+                    const zona = document.getElementById("zona").value;
+                    const direccionFiscal = document.getElementById("direccion_fiscal").value;
+                    const direccionAtencion = document.getElementById("direccion_atencion").value;
+                    const representanteLegal = document.getElementById("representante_legal").value;
+                    const cedulaRepresentante = document.getElementById("cedula_representante").value;
+                    const cargoRepresentanteLegal = document.getElementById("cargo_representante_legal").value;
+                    const correoElectronico = document.getElementById("correo_electronico").value;
+                    const telefonoCliente = document.getElementById("telefono_cliente").value;
+                    const movilCliente = document.getElementById("movil_cliente").value;
+                    const personaContacto = document.getElementById("persona_contacto").value;
+                    const telefonoContacto = document.getElementById("telefono_contacto").value;
+                    const actividadEconomica = document.getElementById("Actividad_Economica").value;
+                    const metodoFacturacion = document.getElementById("metodo_facturacion").value;
+
+                    // Formatear la fecha como dd/MM/aaaa
+                    const fechaFormateada = new Date(fechaInput).toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+
+                    // ========== RECOLECCIÓN DE DATOS DE LA ENCUESTA ==========
+
+                    // 1. Equipos de Computación (ya existía, lo dejamos)
+                    let equiposComputacionResumen = [];
+                    if (document.getElementById('chk_desktops') && document.getElementById('chk_desktops').checked) {
+                        const cant = document.getElementById('cant_desktops').value || '0';
+                        const det = document.getElementById('det_desktops').value || 'Sin detalles';
+                        equiposComputacionResumen.push(`Desktops: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_laptops') && document.getElementById('chk_laptops').checked) {
+                        const cant = document.getElementById('cant_laptops').value || '0';
+                        const det = document.getElementById('det_laptops').value || 'Sin detalles';
+                        equiposComputacionResumen.push(`Laptops: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_servidores') && document.getElementById('chk_servidores').checked) {
+                        const cant = document.getElementById('cant_servidores').value || '0';
+                        const det = document.getElementById('det_servidores').value || 'Sin detalles';
+                        equiposComputacionResumen.push(`Servidores: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_otros') && document.getElementById('chk_otros').checked) {
+                        const cant = document.getElementById('cant_otros').value || '0';
+                        const det = document.getElementById('det_otros').value || 'Sin detalles';
+                        equiposComputacionResumen.push(`Otros: ${cant} unidad(es) - ${det}`);
+                    }
+                    const equiposComputacionFinal = equiposComputacionResumen.length > 0 ? equiposComputacionResumen.join('; ') : 'No posee equipos de computación';
+
+                    // 2. Equipos de Redes
+                    let equiposRedesResumen = [];
+                    if (document.getElementById('chk_routers') && document.getElementById('chk_routers').checked) {
+                        const cant = document.getElementById('cant_routers').value || '0';
+                        const det = document.getElementById('det_routers').value || 'Sin detalles';
+                        equiposRedesResumen.push(`Routers: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_switches') && document.getElementById('chk_switches').checked) {
+                        const cant = document.getElementById('cant_switches').value || '0';
+                        const det = document.getElementById('det_switches').value || 'Sin detalles';
+                        equiposRedesResumen.push(`Switches: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_firewalls') && document.getElementById('chk_firewalls').checked) {
+                        const cant = document.getElementById('cant_firewalls').value || '0';
+                        const det = document.getElementById('det_firewalls').value || 'Sin detalles';
+                        equiposRedesResumen.push(`Firewalls: ${cant} unidad(es) - ${det}`);
+                    }
+                    if (document.getElementById('chk_otros_redes') && document.getElementById('chk_otros_redes').checked) {
+                        const cant = document.getElementById('cant_otros_redes').value || '0';
+                        const det = document.getElementById('det_otros_redes').value || 'Sin detalles';
+                        equiposRedesResumen.push(`Otros: ${cant} unidad(es) - ${det}`);
+                    }
+                    const equiposRedesFinal = equiposRedesResumen.length > 0 ? equiposRedesResumen.join('; ') : 'No posee equipos de redes';
+                    const detalleRedesFinal = document.getElementById('detalle_redes').value || 'No proporcionado';
+
+                    // 3. Productos o Servicios
+                    let productosServiciosResumen = [];
+
+                    // Función auxiliar para recopilar subcategorías marcadas
+                    function recopilarSubcategorias(nombreGrupo, prefijoId) {
+                        const grupo = document.getElementById(prefijoId);
+                        if (!grupo) return [];
+                        const checkboxes = grupo.querySelectorAll('input[type="checkbox"]:checked');
+                        return Array.from(checkboxes).map(cb => cb.value);
+                    }
+
+                    // Recopilar todas las categorías y sus subcategorías
+                    const categorias = [
+                        { id: 'grupo_alimentos', nombre: 'Alimentos y Bebidas' },
+                        { id: 'grupo_ropa', nombre: 'Ropa y Accesorios' },
+                        { id: 'grupo_tecnologia', nombre: 'Tecnología y Electrónica' },
+                        { id: 'grupo_hogar', nombre: 'Hogar y Decoración' },
+                        { id: 'grupo_salud', nombre: 'Salud y Belleza' },
+                        { id: 'grupo_vehiculos', nombre: 'Vehículos y Transporte' },
+                        { id: 'grupo_servicios_prof', nombre: 'Servicios Profesionales' },
+                        { id: 'grupo_servicios_pers', nombre: 'Servicios Personales' },
+                        { id: 'grupo_educacion', nombre: 'Educación y Capacitación' },
+                        { id: 'grupo_transporte_log', nombre: 'Transporte y Logística' },
+                        { id: 'grupo_reparacion', nombre: 'Reparación y Mantenimiento' },
+                        { id: 'grupo_entretenimiento', nombre: 'Entretenimiento y Eventos' }
+                    ];
+
+                    categorias.forEach(cat => {
+                        if (document.getElementById(cat.id.replace('grupo_', 'chk_'))?.checked) {
+                            const subcategorias = recopilarSubcategorias(cat.nombre, cat.id);
+                            if (subcategorias.length > 0) {
+                                productosServiciosResumen.push(`${cat.nombre}: ${subcategorias.join(', ')}`);
+                            }
+                        }
+                    });
+
+                    // Agregar campo "Otro"
+                    const otroProducto = document.getElementById('otros_productos').value;
+                    if (otroProducto) {
+                        productosServiciosResumen.push(`Otro: ${otroProducto}`);
+                    }
+
+                    const productosServiciosFinal = productosServiciosResumen.length > 0 ? productosServiciosResumen.join('; ') : 'No especificado';
+
+                    // 4. Áreas a Controlar
+                    let areasControlResumen = [];
+                    const checkboxesAreas = document.querySelectorAll('input[name="area_control"]:checked');
+                    checkboxesAreas.forEach(cb => {
+                        areasControlResumen.push(cb.value);
+                    });
+                    const otraArea = document.getElementById('otra_area').value;
+                    if (otraArea) {
+                        areasControlResumen.push(`Otra: ${otraArea}`);
+                    }
+                    const areasControlFinal = areasControlResumen.length > 0 ? areasControlResumen.join(', ') : 'Ninguna seleccionada';
+
+                    // 5. Nivel de Ventas Mensuales
+                    const nivelVentasFinal = document.getElementById('nivel_ventas').value || 'No especificado';
+
+                    // 6. Redes Sociales
+                    let redesSocialesResumen = [];
+                    const checkboxesRedes = document.querySelectorAll('input[name="red_social"]:checked');
+                    checkboxesRedes.forEach(cb => {
+                        redesSocialesResumen.push(cb.value);
+                    });
+                    const otraRedSocial = document.getElementById('otra_red_social').value;
+                    if (otraRedSocial) {
+                        redesSocialesResumen.push(`Otra: ${otraRedSocial}`);
+                    }
+                    const redesSocialesFinal = redesSocialesResumen.length > 0 ? redesSocialesResumen.join(', ') : 'No tiene presencia en redes sociales';
+
+                    // 7. Número de Empleados
+                    const numEmpleadosFinal = document.getElementById('num_empleados').value || 'No especificado';
+
+                    // 8. Nivel Educativo
+                    const nivelEducativoFinal = document.getElementById('nivel_educativo').value || 'No especificado';
+
+                    // Crear el contenido HTML para la nueva ventana
+                    let contenidoDocumento = `
+                        <!DOCTYPE html>
+                        <html lang="es">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Registro de Clientes</title>
+                            <style>
+                                /* Estilos para la vista previa de impresión */
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    background-color: #fff;
+                                    margin: 0;
+                                    padding: 20px;
+                                    line-height: 1.4;
+                                }
+                                h1 {
+                                    text-align: center;
+                                    color: rgb(46, 43, 228);
+                                    margin-top: 0;
+                                    margin-bottom: 20px;
+                                    font-size: 22px;
+                                }
+                                .print-header img {
+                                    max-height: 200px;
+                                    max-width: 100%;
+                                    margin-bottom: 10px;
+                                    display: block;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 10px;
+                                    text-align: left;
+                                    font-size: 12px;
+                                }
+                                th {
+                                    background-color: #005883;
+                                    color: white;
+                                }
+                                .pdf-container {
+                                    page-break-before: always;
+                                }
+                                .print-footer {
+                                    margin-top: 20px;
+                                    padding: 15px 0;
+                                    background-color: #f4f4f4;
+                                    font-size: 12px;
+                                    color: #999999;
+                                    line-height: 1.4;
+                                    text-align: center;
+                                }
+                                .print-footer a {
+                                    color: #0073e6;
+                                    text-decoration: none;
+                                }
+                                .print-footer a:hover {
+                                    text-decoration: underline;
+                                }
+                                .print-button {
+                                    text-align: center;
+                                    margin-top: 20px;
+                                }
+                                .print-button button {
+                                    padding: 10px 20px;
+                                    background-color: #005883;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    font-size: 16px;
+                                }
+                                .print-button button:hover {
+                                    background-color: #003d5c;
+                                }
+                                @media print {
+                                    .print-button {
+                                        display: none;
+                                    }
+                                    .pdf-container {
+                                        display: block;
+                                    }
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="print-header">
+                                <a href="logo.png"><img style="height: 300px;" src="logo.png" title="source: logo.png" /></a>
+                                <h1>Registro de Clientes</h1>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Datos</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Empresa Solicitante:</strong></td>
+                                    <td>${empresa}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. R.I.F.:</strong></td>
+                                    <td>${rif}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de Contribuyente:</strong></td>
+                                    <td>${tipoContribuyente}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fecha de Constitución:</strong></td>
+                                    <td>${fechaFormateada}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Zona/Estado:</strong></td>
+                                    <td>${zona}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dirección Fiscal:</strong></td>
+                                    <td>${direccionFiscal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dirección de Atención:</strong></td>
+                                    <td>${direccionAtencion}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Representante Legal:</strong></td>
+                                    <td>${representanteLegal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cédula del Representante:</strong></td>
+                                    <td>${cedulaRepresentante}</td>
+                                <tr>
+                                    <td><strong>Cargo del Representante Legal:</strong></td>
+                                    <td>${cargoRepresentanteLegal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Correo Electrónico:</strong></td>
+                                    <td>${correoElectronico}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Teléfono Cliente:</strong></td>
+                                    <td>${telefonoCliente}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Móvil Cliente:</strong></td>
+                                    <td>${movilCliente}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Persona Contacto:</strong></td>
+                                    <td>${personaContacto}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Teléfono Contacto:</strong></td>
+                                    <td>${telefonoContacto}</td>
+                                <tr>
+                                    <td><strong>Actividad Económica:</strong></td>
+                                    <td>${actividadEconomica}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Método de Facturación:</strong></td>
+                                    <td>${metodoFacturacion}</td>
+                                </tr>
+                                <!-- Sección de Encuesta en la Planilla -->
+                                <tr>
+                                    <td colspan="2" style="background-color: #e0e0e0; font-weight: bold; text-align: center;">INFORMACION AMPLIADA DE LA EMPRESA</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1. Equipos de Computación:</strong></td>
+                                    <td>${equiposComputacionFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Equipos de Redes:</strong></td>
+                                    <td>${equiposRedesFinal}<br><strong>Descripción:</strong> ${detalleRedesFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Productos o Servicios:</strong></td>
+                                    <td>${productosServiciosFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Áreas a Controlar:</strong></td>
+                                    <td>${areasControlFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Nivel de Ventas Mensuales (USD):</strong></td>
+                                    <td>${nivelVentasFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6. Redes Sociales:</strong></td>
+                                    <td>${redesSocialesFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>7. Número de Empleados:</strong></td>
+                                    <td>${numEmpleadosFinal}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>8. Nivel Educativo del Personal Administrativo:</strong></td>
+                                    <td>${nivelEducativoFinal}</td>
+                                </tr>
+                            </table>
+                    `;
+
+                    // Verificar si se cargó un archivo PDF
+                    if (pdfFile) {
+                        const pdfUrl = URL.createObjectURL(pdfFile);
+                        contenidoDocumento += `
+                            <div class="pdf-container">
+                                <h2>Anexo: ${pdfFile.name}</h2>
+                                <embed src="${pdfUrl}" type="application/pdf" width="100%" height="600px">
+                            </div>
+                        `;
+                    }
+
+                    contenidoDocumento += `
+                        <div class="print-footer">
+                            &copy; 2025 Gotham Group Asesores, C.A. Todos los derechos reservados.<br>
+                            RegistroClientesV14Qw<br>
+                            Para más información, contáctenos en:
+                            <a href="mailto:gothamgroup@gmail.com">gothamgroup@gmail.com</a>
+                        </div>
+                        <div class="print-button">
+                            <button onclick="window.print()">Imprimir Documento</button>
+                            <button onclick="window.location.href = window.location.href;">Regresar al Formulario</button>
+                        </div>
+                        </body>
+                        </html>
+                    `;
+
+                    // Abrir una nueva ventana y escribir el contenido
+                    const ventana = window.open('', '_blank');
+                    ventana.document.write(contenidoDocumento);
+                    ventana.document.close();
+                });
+            });
+        </script>
+    </body>
+    </html>
